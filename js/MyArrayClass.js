@@ -51,7 +51,33 @@ class MyArray{
         }
         return result;
     }
-    
+    concat(MyArrayInstance){
+        const newMyArray = new MyArray();
+        for(let i = 0; i < this.length; i++){
+            newMyArray.push(MyArrayInstance[i]);
+        }
+        return newMyArray;
+    }
+    flat(depth=1){
+        // let result = new MyArray();
+        // for(let i = 0; i < this.length; i++){
+        //     const isArray = MyArray.isMyArray(this[i]);
+        //     if(isArray && depth){
+        //         const subResult = this[i].flat(depth-1);
+        //         result.concat(subResult);
+        //     }else if(this[i]!==undefined){
+        //         result.push(this[i]);
+        //     }
+        // }
+        this.forEach((item)=>{
+            if(MyArray.isMyArray(item) && depth){ 
+                result = result.concat(item.flat(depth-1))
+        }else if(item!==undefined){
+            result.push(item);
+        }
+    });
+    return result;
+}
     static isMyArray(obj){
         return obj instanceof MyArray;
     }    
